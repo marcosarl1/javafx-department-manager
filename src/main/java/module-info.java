@@ -8,5 +8,6 @@ module com.workshopjavafxjdbc {
     requires org.kordamp.bootstrapfx.core;
 
     opens com.workshopjavafxjdbc to javafx.fxml;
+    opens com.workshopjavafxjdbc.controller to javafx.fxml;
     exports com.workshopjavafxjdbc;
 }
