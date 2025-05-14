@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.workshopjavafxjdbc.controller.DepartmentListController">
    <children>
       <Label text="Department Registration">
          <font>
@@ -18,13 +17,13 @@
       </Label>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" text="New" />
+          <Button fx:id="btnNew" mnemonicParsing="false" onAction="#onBtnNewAction" text="New" />
         </items>
       </ToolBar>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tbDepartment">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="tbColId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="tbColName" prefWidth="75.0" text="Name" />
         </columns>
       </TableView>
    </children>
