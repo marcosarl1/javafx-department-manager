@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class MainViewController implements Initializable {
 
@@ -35,12 +36,15 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemDepartmentAction() {
-        loadView2("/com/workshopjavafxjdbc/DepartmentList.fxml");
+        loadView("/com/workshopjavafxjdbc/DepartmentList.fxml", (DepartmentListController controller) -> {
+            controller.setDepartmentService(new DepartmentService());
+            controller.updateTbView();
+        });
     }
 
     @FXML
     public void onMenuItemAboutAction() {
-        loadView("/com/workshopjavafxjdbc/About.fxml");
+        loadView("/com/workshopjavafxjdbc/About.fxml", x -> {});
     }
 
     @Override
@@ -48,24 +52,7 @@ public class MainViewController implements Initializable {
 
     }
 
-    private synchronized void loadView(String absoluteName) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(absoluteName));
-            VBox newVBox = fxmlLoader.load();
-
-            Scene scene = Main.getScene();
-            VBox mainVBox = (VBox) ((ScrollPane) scene.getRoot()).getContent();
-
-            Node mainMenu = mainVBox.getChildren().getFirst();
-            mainVBox.getChildren().clear();
-            mainVBox.getChildren().add(mainMenu);
-            mainVBox.getChildren().addAll(newVBox.getChildren());
-        } catch (IOException e) {
-            Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
-
-    private synchronized void loadView2(String absoluteName) {
+    private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVBox = fxmlLoader.load();
@@ -78,9 +65,8 @@ public class MainViewController implements Initializable {
             mainVBox.getChildren().add(mainMenu);
             mainVBox.getChildren().addAll(newVBox.getChildren());
 
-            DepartmentListController controller = fxmlLoader.getController();
-            controller.setDepartmentService(new DepartmentService());
-            controller.updateTbView();
+            T controller = fxmlLoader.getController();
+            initializingAction.accept(controller);
         } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
         }
