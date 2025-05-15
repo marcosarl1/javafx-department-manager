@@ -5,7 +5,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.workshopjavafxjdbc.controller.MainViewController">
    <content>
-      <VBox prefHeight="333.0" prefWidth="564.0">
+      <VBox prefHeight="743.0" prefWidth="882.0">
          <children>
             <MenuBar>
               <menus>
