@@ -10,5 +10,6 @@ module com.workshopjavafxjdbc {
 
     opens com.workshopjavafxjdbc to javafx.fxml;
     opens com.workshopjavafxjdbc.controller to javafx.fxml;
+    opens com.workshopjavafxjdbc.model to javafx.base;
     exports com.workshopjavafxjdbc;
 }
