@@ -6,7 +6,6 @@ import com.workshopjavafxjdbc.model.Department;
 import com.workshopjavafxjdbc.model.Seller;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,7 @@ public class SellerDaoJDBC implements SellerDao {
         try (PreparedStatement st = conn.prepareStatement("INSERT INTO seller (Name, Email, BirthDate, BaseSalary, DepartmentId) VALUES (?, ?, ?, ?, ?)")) {
             st.setString(1, seller.getName());
             st.setString(2, seller.getEmail());
-            st.setDate(3, Date.valueOf(seller.getBirthdate()));
+            st.setDate(3, Date.valueOf(seller.getBirthDate()));
             st.setDouble(4, seller.getBaseSalary());
             st.setInt(5, seller.getDepartment().getId());
             st.executeUpdate();
@@ -39,7 +38,7 @@ public class SellerDaoJDBC implements SellerDao {
         try (PreparedStatement st = conn.prepareStatement("UPDATE seller SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? WHERE Id = ?")) {
             st.setString(1, seller.getName());
             st.setString(2, seller.getEmail());
-            st.setDate(3, Date.valueOf(seller.getBirthdate()));
+            st.setDate(3, Date.valueOf(seller.getBirthDate()));
             st.setDouble(4, seller.getBaseSalary());
             st.setInt(5, seller.getDepartment().getId());
             st.setInt(6, seller.getId());
@@ -126,7 +125,7 @@ public class SellerDaoJDBC implements SellerDao {
         seller.setName(rs.getString("Name"));
         seller.setEmail(rs.getString("Email"));
         seller.setBaseSalary(rs.getDouble("BaseSalary"));
-        seller.setBirthdate(rs.getDate("BirthDate").toLocalDate());
+        seller.setBirthDate(rs.getDate("BirthDate").toLocalDate());
         seller.setDepartment(dep);
         return seller;
     }

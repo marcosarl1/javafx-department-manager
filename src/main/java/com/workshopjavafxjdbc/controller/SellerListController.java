@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -40,6 +41,15 @@ public class SellerListController implements Initializable, DataChangeListener {
 
     @FXML
     private TableColumn<Seller, String> tbColName;
+
+    @FXML
+    private TableColumn<Seller, String> tbColEmail;
+
+    @FXML
+    private TableColumn<Seller, LocalDate> tbColBirthDate;
+
+    @FXML
+    private TableColumn<Seller, Double> tbColBaseSalary;
 
     @FXML
     private TableColumn<Seller, Seller> tblColEdit;
@@ -71,6 +81,11 @@ public class SellerListController implements Initializable, DataChangeListener {
     private void initializeNodes() {
         tbColId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tbColName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbColEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tbColBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        Utils.formatTableColumnDate(tbColBirthDate, "dd/MM/yyyy");
+        tbColBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalary"));
+        Utils.formatTableColumnDouble(tbColBaseSalary, 2);
 
         Stage stage = (Stage) Main.getScene().getWindow();
         tbSeller.prefHeightProperty().bind(stage.heightProperty());

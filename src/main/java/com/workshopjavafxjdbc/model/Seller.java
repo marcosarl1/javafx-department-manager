@@ -8,26 +8,26 @@ public class Seller {
     private Integer id;
     private String name;
     private String email;
-    private LocalDate birthdate;
+    private LocalDate birthDate;
     private Double baseSalary;
 
     private Department department;
 
     public Seller() {}
 
-    public Seller(Integer id, String name, String email, LocalDate birthdate, Double baseSalary, Department department) {
+    public Seller(Integer id, String name, String email, LocalDate birthDate, Double baseSalary, Department department) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.birthdate = birthdate;
+        this.birthDate = birthDate;
         this.baseSalary = baseSalary;
         this.department = department;
     }
 
-    public Seller(String name, String email, LocalDate birthdate, Double baseSalary, Department department) {
+    public Seller(String name, String email, LocalDate birthDate, Double baseSalary, Department department) {
         this.name = name;
         this.email = email;
-        this.birthdate = birthdate;
+        this.birthDate = birthDate;
         this.baseSalary = baseSalary;
         this.department = department;
     }
@@ -56,12 +56,12 @@ public class Seller {
         this.email = email;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Double getBaseSalary() {

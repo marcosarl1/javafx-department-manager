@@ -24,6 +24,9 @@
         <columns>
           <TableColumn fx:id="tbColId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="tbColName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="tbColEmail" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="tbColBirthDate" prefWidth="75.0" text="Birthdate" />
+            <TableColumn fx:id="tbColBaseSalary" prefWidth="75.0" text="Base Salary" />
             <TableColumn fx:id="tblColEdit" prefWidth="75.0" />
             <TableColumn fx:id="tblColRemove" prefWidth="75.0" />
         </columns>

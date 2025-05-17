@@ -2,8 +2,11 @@ package com.workshopjavafxjdbc.util;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Utils {
 
@@ -17,5 +20,41 @@ public class Utils {
         } catch (NumberFormatException e) {
             return null;
         }
+    }
+
+    public static <T> void formatTableColumnDate(TableColumn<T, LocalDate> tableColumn, String format) {
+        tableColumn.setCellFactory(column -> {
+            TableCell<T, LocalDate> cell = new TableCell<T, LocalDate>() {
+                private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                @Override
+                    protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.format(formatter));
+                    }
+                }
+            };
+            return cell;
+        });
+    }
+
+    public static <T> void formatTableColumnDouble(TableColumn<T, Double> tableColumn, int decimalPlaces) {
+        tableColumn.setCellFactory(column -> {
+            TableCell<T, Double> cell = new TableCell<T, Double>() {
+
+                @Override
+                protected void updateItem(Double item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(String.format("%."+decimalPlaces+"f", item));
+                    }
+                }
+            };
+            return cell;
+        });
     }
 }
