@@ -19,6 +19,8 @@ import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class SellerFormController implements Initializable {
@@ -112,21 +114,40 @@ public class SellerFormController implements Initializable {
     }
 
     private Seller getFormData() {
-        Seller dep = new Seller();
+        Seller obj = new Seller();
 
         ValidationException validationException = new ValidationException("Validation error");
 
-        dep.setId(Utils.tryParseToInt(txtId.getText()));
+        obj.setId(Utils.tryParseToInt(txtId.getText()));
         if (txtName.getText() == null || txtName.getText().trim().isEmpty()) {
             validationException.addError("name", "Field can't be empty");
         }
-        dep.setName(txtName.getText());
+        obj.setName(txtName.getText());
+
+        if (txtEmail.getText() == null || txtEmail.getText().trim().isEmpty()) {
+            validationException.addError("email", "Field can't be empty");
+        }
+        obj.setEmail(txtEmail.getText());
+
+        if (dpBirtDate.getValue() == null) {
+            validationException.addError("birthDate", "Field can't be empty");
+        } else {
+            LocalDate date = dpBirtDate.getValue();
+            obj.setBirthDate(date);
+        }
+
+        if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().isEmpty()) {
+            validationException.addError("baseSalary", "Field can't be empty");
+        }
+        obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
+
+        obj.setDepartment(cbxDepartment.getValue());
 
         if (!validationException.getErrors().isEmpty()) {
             throw validationException;
         }
 
-        return dep;
+        return obj;
     }
 
     @FXML
@@ -174,9 +195,10 @@ public class SellerFormController implements Initializable {
     private void setErrorMessages(Map<String, String> errors) {
         Set<String> fields = errors.keySet();
 
-        if (fields.contains("name")) {
-            labelErrorName.setText(errors.get("name"));
-        }
+        labelErrorName.setText((fields.contains("name") ? errors.get("name") : ""));
+        labelErrorEmail.setText((fields.contains("email") ? errors.get("email") : ""));
+        labelErrorBirthDate.setText((fields.contains("birthDate") ? errors.get("birthDate") : ""));
+        labelErrorBaseSalary.setText((fields.contains("baseSalary") ? errors.get("baseSalary") : ""));
     }
 
     private void initComboBoxDepartment() {
